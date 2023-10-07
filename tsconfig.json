@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "skipLibCheck": true,
     "isolatedModules": true,
@@ -11,5 +11,5 @@
       "#*": ["*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "./global-types.d.ts"]
 }

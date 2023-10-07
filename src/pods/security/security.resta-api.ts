@@ -2,6 +2,8 @@ import {Router} from 'express';
 import { userRepository } from '#dals/index.js';
 import jwt from 'jsonwebtoken';
 import { UserSession } from '#common-app/models/index.js';
+import { envConstants } from '#core/constants/index.js';
+
 
 export const securityApi = Router();
 
@@ -27,7 +29,7 @@ securityApi.post('/login', async (req, res, next) => {
         id: user._id.toHexString()
       };
 
-      const secret = process.env.SECRET_WORD; 
+      const secret = process.env.SECRET_WORD;
       const token = jwt.sign(userSession, secret, {
         expiresIn: '1d',
         algorithm: 'HS256'
