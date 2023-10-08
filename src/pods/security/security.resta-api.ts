@@ -26,7 +26,8 @@ securityApi.post('/login', async (req, res, next) => {
     if(user){
 
       const userSession: UserSession = {
-        id: user._id.toHexString()
+        id: user._id.toHexString(),
+        role: user.role
       };
 
       const secret = process.env.SECRET_WORD;

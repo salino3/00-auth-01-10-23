@@ -14,11 +14,13 @@ export const db: DB = {
       _id: new ObjectId(),
       email: 'admin@email.com',
       password: 'test',
+      role: 'admin'
     },
     {
       _id: new ObjectId(),
       email: 'user@email.com',
       password: 'test',
+      role: 'standard-user'
     },
   ],
   books: [

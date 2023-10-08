@@ -7,11 +7,12 @@ import {
   mapBookFromApiToModel,
 } from './book.mappers.js';
 import { envConstants } from '#core/constants/env.constants.js';
+import { authorizationMiddleware } from '#pods/security/security.middlewares.js';
 
 export const booksApi = Router();
 
 booksApi
-  .get('/', async (req, res, next) => {
+  .get('/', authorizationMiddleware(), async (req, res, next) => {
     try {
 
           const page = Number(req.query.page);
@@ -20,7 +21,7 @@ booksApi
 
           res.send(mapBookListFromModelToApi(bookList));
 
-   
+
     } catch (error) {
       next(error);
     };
@@ -38,7 +39,7 @@ booksApi
       next(error);
     }
   })
-  .post('/', async (req, res, next) => {
+  .post('/', authorizationMiddleware(['admin']) , async (req, res, next) => {
     try {
       const book = mapBookFromApiToModel(req.body);
       const newBook = await bookRepository.saveBook(book);
@@ -61,7 +62,7 @@ booksApi
       next(error);
     }
   })
-  .delete('/:id', async (req, res, next) => {
+  .delete('/:id', authorizationMiddleware(['admin']),  async (req, res, next) => {
     try {
       const { id } = req.params;
       const isDeleted = await bookRepository.deleteBook(id);
